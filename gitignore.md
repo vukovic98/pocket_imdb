@@ -1,1 +1,2 @@
-# pocket_imdb
+env/
+node_modules/

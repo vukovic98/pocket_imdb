@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {Col, Form, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
@@ -8,9 +8,7 @@ import {register} from '../../store/actions/AuthActions';
 
 export default function Register() {
 
-    localStorage.removeItem('access_token');
     const dispatch = useDispatch();
-    const [pic, setPic] = useState(false);
 
     const formik = useFormik({
         initialValues: {
@@ -34,6 +32,7 @@ export default function Register() {
             username: Yup.string().email('Invalid email address').required('Required'),
         }),
         onSubmit: values => {
+            console.log(values);
             dispatch(register(values));
         },
     });
@@ -107,8 +106,10 @@ export default function Register() {
                         <Form.Row>
                         <Form.Group>
                             <Form.File 
-                              id="exampleFormControlFile1" 
+                              id="image" 
                               label="Choose image" 
+                              required
+                              {...formik.getFieldProps('image')}
                             />
                           </Form.Group>
                           
