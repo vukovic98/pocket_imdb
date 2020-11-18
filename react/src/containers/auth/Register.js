@@ -5,7 +5,6 @@ import {useDispatch} from 'react-redux';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {register} from '../../store/actions/AuthActions';
-import Selfie from '../../component/Selfie';
 
 export default function Register() {
 
@@ -117,7 +116,6 @@ export default function Register() {
                         </Form.Group>
                         </Form.Row>
                         
-                        {pic ? (<Selfie />) : ('')}
                         <Button 
                             style={{'backgroundColor':'rgb(86,140,199)', 'borderColor':'rgb(86,140,199)'}} 
                             size="lg" 
