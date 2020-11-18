@@ -1,0 +1,24 @@
+# Core
+Django==3.0.6
+mysqlclient==1.4.4
+django-model-utils==3.1.2
+# Rest apis
+djangorestframework==3.11.0
+Markdown==3.0.1
+drf-yasg==1.17.0
+django-filter==2.1.0
+django-cors-headers==3.5.0
+djangorestframework-simplejwt
+# Developer Tools
+ipdb==0.11
+ipython==7.2.0
+flake8==3.7.5
+yapf==0.28.0
+sentry-sdk==0.11.2
+django-inlinecss==0.3.0
+# Testing
+mock==2.0.0
+factory-boy==2.11.1
+django-nose==1.4.6
+nose-progressive==1.5.2
+coverage==4.5.2

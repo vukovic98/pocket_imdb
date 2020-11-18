@@ -12,11 +12,12 @@ export default function Login() {
 
     const formik = useFormik({
         initialValues: {
-            email: '',
+            username: '',
             password: '',
         },
         validationSchema: Yup.object({
-            email: Yup.string()
+            username: Yup.string()
+            .email('Email form is invalid!')
             .required('Required'),
             password: Yup.string()
             .required('Required')
@@ -36,12 +37,12 @@ export default function Login() {
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control 
                                     type="text" 
-                                    id="email"
+                                    id="username"
                                     placeholder="Enter email" 
-                                    {...formik.getFieldProps('email')}
+                                    {...formik.getFieldProps('username')}
                                 />
-                                {formik.touched.email && formik.errors.email ? (
-                                    <div style={{'color':'red'}}>*{formik.errors.email}</div>
+                                {formik.touched.username && formik.errors.username ? (
+                                    <div style={{'color':'red'}}>*{formik.errors.username}</div>
                                 ) : null}
                             </Form.Group>
                         </Form.Row>
