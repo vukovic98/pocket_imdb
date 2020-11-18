@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Like, Movie, Comment
+from .models import Like, Movie, Comment, Code
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,3 +32,8 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Comment
         fields = ('id', 'user', 'movie', 'content')
+
+class CodeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Code
+        fields = ('id', 'user', 'verificationCode')

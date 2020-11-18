@@ -16,12 +16,12 @@ export default function Register() {
         initialValues: {
             first_name: '',
             last_name: '',
-            email: '',
+            username: '',
             password: '',
             image: ''
         },
         validationSchema: Yup.object({
-            username: Yup.string()
+            image: Yup.string()
             .required('Required'),
             password: Yup.string()
             .required('Required'),
@@ -31,7 +31,7 @@ export default function Register() {
             last_name: Yup.string()
             .max(20, 'Last name must contain 20 letters at most')
             .required('Required'),
-            email: Yup.string().email('Invalid email address').required('Required'),
+            username: Yup.string().email('Invalid email address').required('Required'),
         }),
         onSubmit: values => {
             dispatch(register(values));
@@ -81,11 +81,11 @@ export default function Register() {
                                 type="email" 
                                 required
                                 placeholder="Enter email" 
-                                id="email"
-                                {...formik.getFieldProps('email')}
+                                id="username"
+                                {...formik.getFieldProps('username')}
                             />
-                            {formik.touched.email && formik.errors.email ? (
-                                    <div style={{'color':'red'}}>*{formik.errors.email}</div>
+                            {formik.touched.username && formik.errors.username ? (
+                                    <div style={{'color':'red'}}>*{formik.errors.username}</div>
                                 ) : null}
                             </Form.Group>
                         </Form.Row>
@@ -111,9 +111,7 @@ export default function Register() {
                               label="Choose image" 
                             />
                           </Form.Group>
-                          <Form.Group className="ml-auto mt-auto mb-auto mr-0">
-                          <Button variant='success' size='sm' className='rounded' onClick={() => setPic(true)}>Or take a selfie!</Button>
-                        </Form.Group>
+                          
                         </Form.Row>
                         
                         <Button 
