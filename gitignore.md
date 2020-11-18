@@ -1,2 +1,2 @@
-env/
+django/env
 node_modules/
