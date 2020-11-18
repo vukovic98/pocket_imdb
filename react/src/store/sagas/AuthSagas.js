@@ -18,6 +18,7 @@ export function* userLogin({ payload }) {
 
 export function* userRegister({ payload }) {
   try {
+    console.log("REGISTER");
     yield call(AuthService.signup, payload);
 
     yield put(push('/login'));
