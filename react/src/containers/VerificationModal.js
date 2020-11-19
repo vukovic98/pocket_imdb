@@ -36,7 +36,7 @@ export default function VerificationModal() {
                         
                         <Form.Row  className="text-left">
                             <div className="text-center mb-5 text-muted">
-                            We've sent you an email. please verify your identity before continuing.
+                            We've sent you an email. Please verify your identity before continuing.
                             </div>
                         </Form.Row>
                         <Form.Row className="text-left">

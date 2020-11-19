@@ -6,14 +6,23 @@ import AuthService from '../../services/AuthService';
 
 export function* userLogin({ payload }) {
   try {
-    
-    yield call(AuthService.login, payload);
+    const user = yield call(AuthService.userData, payload.username);
 
-    yield put(authUser(true));
-    yield put(push('/home'));
-    yield put(go());
+    if(user[0].verified) {
+      yield call(AuthService.login, payload);
+
+      yield put(authUser(true));
+      yield put(push('/home'));
+      yield put(go());
+    } else {
+      yield put(push('/verify'));
+      yield put(go());
+    }
   } catch (error) {
+    alert('No such user');
     yield put(loginError(true));
+    yield put(push('/login'));
+    yield put(go());
   }
 }
 

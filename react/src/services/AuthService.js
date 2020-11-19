@@ -4,7 +4,8 @@ const ENDPOINTS = {
   LOGIN: 'user/api/auth/login/',
   REGISTER: 'user/api/auth/register/',
   VERIFICATION: 'user/api/auth/verify/',
-  LOGOUT: 'user/logout'
+  LOGOUT: 'user/logout',
+  USER_DATA: 'user/users?username='
 };
 
 class AuthService extends ApiService {
@@ -54,6 +55,12 @@ class AuthService extends ApiService {
 
     return data;
   };
+
+  userData = async username => {
+    const { data } = await this.apiClient.get(ENDPOINTS.USER_DATA + username);
+
+    return data;
+  }
 
   verify = async verificationData => {
     const { data } = await this.apiClient.post(ENDPOINTS.VERIFICATION, verificationData);
