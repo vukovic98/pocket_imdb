@@ -8,6 +8,7 @@ from rest_framework import permissions, viewsets
 from .models import User, Code
 from random import randint
 from django.core.mail import send_mail
+from django_filters.rest_framework import DjangoFilterBackend
 
 # Create your views here.
 
@@ -18,6 +19,8 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer 
     #permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['username']
 
 class CustomUserVerify(APIView):
     permission_classes = [AllowAny]
