@@ -1,4 +1,4 @@
-import { AUTH_USER, REGISTER } from '../actions/ActionTypes';
+import { AUTH_USER, REGISTER, VERIFICATION } from '../actions/ActionTypes';
 import AuthService from '../../services/AuthService';
 
 const authReducer = (state = AuthService.isAuthenticated(), action) => {
@@ -7,6 +7,8 @@ const authReducer = (state = AuthService.isAuthenticated(), action) => {
     case AUTH_USER:
       return action.payload;
     case REGISTER:
+      return action.payload;
+    case VERIFICATION:
       return action.payload;
     default:
       return state;

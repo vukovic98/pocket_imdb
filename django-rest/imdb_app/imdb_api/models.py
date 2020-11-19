@@ -20,7 +20,3 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=False)
     content = models.TextField(max_length=200)
-
-class Code(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
-    verificationCode = models.CharField(max_length=6)
