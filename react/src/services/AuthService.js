@@ -1,9 +1,10 @@
 import ApiService from './ApiService';
 
 const ENDPOINTS = {
-  LOGIN: '/api/auth/login',
-  REGISTER: '/api/auth/register',
-  LOGOUT: '/logout'
+  LOGIN: 'user/api/auth/login/',
+  REGISTER: 'user/api/auth/register/',
+  VERIFICATION: 'user/api/auth/verify/',
+  LOGOUT: 'user/logout'
 };
 
 class AuthService extends ApiService {
@@ -50,6 +51,12 @@ class AuthService extends ApiService {
 
   signup = async signupData => {
     const { data } = await this.apiClient.post(ENDPOINTS.REGISTER, signupData);
+
+    return data;
+  };
+
+  verify = async verificationData => {
+    const { data } = await this.apiClient.post(ENDPOINTS.VERIFICATION, verificationData);
 
     return data;
   };

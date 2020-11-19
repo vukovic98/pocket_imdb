@@ -7,17 +7,18 @@ import Login from '../containers/auth/Login';
 import Register from '../containers/auth/Register';
 import Home from '../containers/Home';
 import { authUser } from '../store/actions/AuthActions';
+import VerificationModal from '../containers/VerificationModal';
 
 class AppLayout extends React.Component {
-  componentDidUpdate(prevProps) {
-    if (this.props.user !== prevProps.user) {
-      if (this.props.user) {
-        this.props.history.push('/home');
-      } else {
-        this.props.history.push('/login');
-      }
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.user !== prevProps.user) {
+  //     if (this.props.user) {
+  //       this.props.history.push('/verify');
+  //     } else {
+  //       this.props.history.push('/login');
+  //     }
+  //   }
+  // }
 
   render() {
     return this.props.user ? (
@@ -26,6 +27,7 @@ class AppLayout extends React.Component {
       </div>
     ) : (
       <div>
+        <Route exact path="/verify" component={VerificationModal} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
       </div>

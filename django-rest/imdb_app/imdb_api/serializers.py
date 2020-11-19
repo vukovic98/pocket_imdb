@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Like, Movie, Comment, Code
+from .models import Like, Movie, Comment
 
 
 class MovieSerializer(serializers.HyperlinkedModelSerializer):
@@ -17,7 +17,4 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
         model = Comment
         fields = ('id', 'user', 'movie', 'content')
 
-class CodeSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Code
-        fields = ('id', 'user', 'verificationCode')
+
