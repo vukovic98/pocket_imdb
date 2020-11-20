@@ -6,7 +6,7 @@ const ENDPOINTS = {
   VERIFICATION: 'user/api/auth/verify/',
   LOGOUT: 'user/logout',
   USER_DATA: 'user/users?username='
-};
+}
 
 class AuthService extends ApiService {
   constructor() {
@@ -15,8 +15,9 @@ class AuthService extends ApiService {
   }
 
   init = () => {
-    const token = this.getToken();
+    
     const user = this.getUser();
+    const token = this.getToken();
 
     if (token && user) {
       this.setAuthorizationHeader();
@@ -76,6 +77,7 @@ class AuthService extends ApiService {
 
   getToken = () => {
     const user = localStorage.getItem('user');
+    
     return user ? JSON.parse(user).access_token : undefined;
   };
 

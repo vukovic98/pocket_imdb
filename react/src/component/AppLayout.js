@@ -1,55 +1,25 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import Login from '../containers/auth/Login';
 import Register from '../containers/auth/Register';
 import Home from '../containers/Home';
-import { authUser } from '../store/actions/AuthActions';
+import Profile from '../containers/Profile';
 import VerificationModal from '../containers/VerificationModal';
 
-class AppLayout extends React.Component {
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.user !== prevProps.user) {
-  //     if (this.props.user) {
-  //       this.props.history.push('/verify');
-  //     } else {
-  //       this.props.history.push('/login');
-  //     }
-  //   }
-  // }
-
-  render() {
-    return this.props.user ? (
-      <div>
-        <Route exact path="/home" component={Home} />
-      </div>
-    ) : (
-      <div>
-        <Route exact path="/verify" component={VerificationModal} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-      </div>
-    );
-  }
+export default function AppLayout() {
+  return(
+    <div>
+      <Router>
+        <Switch>
+          <Route path='/' exact> <Register /> </Route>
+          <Route path='/login' exact> <Login /> </Route>
+          <Route path='/verify' exact> <VerificationModal /> </Route>
+          <Route path='/home' exact> <Home /> </Route>
+          <Route path='/profile' exact> <Profile /> </Route>
+        </Switch>
+      </Router>
+    </div>
+  );
 }
-
-const mapStateToProps = state => {
-  return {
-    user: state.authUser
-  };
-};
-
-const mapDispatchToProps = () => {
-  return {
-    authUser
-  };
-};
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(AppLayout)
-);

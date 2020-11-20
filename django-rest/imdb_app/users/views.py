@@ -3,12 +3,14 @@ from .serializers import UserSerializer, CodeSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import AllowAny
+from rest_framework.parsers import JSONParser, MultiPartParser
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import permissions, viewsets
 from .models import User, Code
 from random import randint
 from django.core.mail import send_mail
 from django_filters.rest_framework import DjangoFilterBackend
+import os
 
 # Create your views here.
 
@@ -21,6 +23,17 @@ class UserViewSet(viewsets.ModelViewSet):
     #permission_classes = [permissions.IsAuthenticated]
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['username']
+
+class SessionUserData(APIView):
+
+    permission_classes = [IsAuthenticated]
+    
+
+    def get(self, request):
+        user_data = UserSerializer(request.user).data
+
+        return Response(data=user_data)
+
 
 class CustomUserVerify(APIView):
     permission_classes = [AllowAny]
@@ -44,13 +57,16 @@ class CustomUserVerify(APIView):
 
 class CustomUserRegister(APIView):
     permission_classes = [AllowAny]
+    #parser_classes = [JSONParser, MultiPartParser]
 
     def post(self, request):
+        print(request.data)
         reg_serializer = UserSerializer(data=request.data)
         
         if reg_serializer.is_valid(raise_exception=True):
             newUser = reg_serializer.save()
-            userUrl = 'http://localhost:8000/user/users/' + str(newUser.id) + "/"
+            
+            userUrl = os.getenv('USER_PATH') + str(newUser.id) + "/"
             print(userUrl)
             newCode = {
                 "user": userUrl ,
@@ -65,7 +81,7 @@ class CustomUserRegister(APIView):
                 code_reg.save() 
                 send_mail(
                     'Verification Mail',
-                    'Follow the link and insert the code below.\nhttp://localhost:3000/verify\n' + str(code_reg.data['verificationCode']),
+                    'Follow the link and insert the code below.\n'+ os.getenv('VERIFICATION_PATH') +'\n' + str(code_reg.data['verificationCode']),
                     'from@example.com',
                     [reg_serializer.data['username']],
                     fail_silently=False,
