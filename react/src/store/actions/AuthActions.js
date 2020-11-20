@@ -21,9 +21,10 @@ export const verify = verifyData => {
   };
 };
 
-export const userData = () => {
+export const userData = data => {
   return {
-    type: USER_DATA
+    type: USER_DATA,
+    payload: data
   };
 };
 

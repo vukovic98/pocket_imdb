@@ -11,7 +11,7 @@ const authReducer = (state = AuthService.isAuthenticated(), action) => {
     case VERIFICATION:
       return action.payload;
     case USER_DATA:
-      return action.payload
+      return action.payload;
     default:
       return state;
   }

@@ -17,4 +17,5 @@ urlpatterns = [
     path('api/auth/verify/', views.CustomUserVerify.as_view(), name='verify_user'),
     path('api/auth/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('sessionUser/', views.SessionUserData.as_view(), name='session_user'),
 ] 

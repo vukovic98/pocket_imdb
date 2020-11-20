@@ -6,8 +6,9 @@ import AuthService from '../../services/AuthService';
 
 export function* userLogin({ payload }) {
   try {
+    console.log('LOGIN');
     const user = yield call(AuthService.userData, payload.username);
-
+    console.log(user);
     if(user[0].verified) {
       yield call(AuthService.login, payload);
 
@@ -39,7 +40,6 @@ export function* userRegister({ payload }) {
 
 export function* userVerification({ payload }) {
   try {
-    console.log("VERIFY");
     yield call(AuthService.verify, payload);
 
     yield put(push('/login'));
@@ -50,3 +50,4 @@ export function* userVerification({ payload }) {
     yield put(go());
   }
 }
+

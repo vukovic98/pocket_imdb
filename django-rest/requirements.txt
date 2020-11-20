@@ -2,6 +2,7 @@
 Django==3.0.6
 mysqlclient==1.4.4
 django-model-utils==3.1.2
+python-dotenv==0.15.0
 # Rest apis
 djangorestframework==3.11.0
 Markdown==3.0.1
@@ -16,6 +17,7 @@ flake8==3.7.5
 yapf==0.28.0
 sentry-sdk==0.11.2
 django-inlinecss==0.3.0
+Pillow==8.0.1
 # Testing
 mock==2.0.0
 factory-boy==2.11.1

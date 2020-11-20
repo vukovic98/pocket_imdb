@@ -32,8 +32,16 @@ export default function Register() {
             username: Yup.string().email('Invalid email address').required('Required'),
         }),
         onSubmit: values => {
-            console.log(values);
-            dispatch(register(values));
+            const formData = new FormData();
+
+            formData.append("first_name", values.first_name);
+            formData.append("last_name", values.last_name);
+            formData.append("username", values.username);
+            formData.append("password", values.password);
+            formData.append("image", values.image);
+            formData.append("verified", false);
+
+            dispatch(register(formData));
         },
     });
 
@@ -109,7 +117,9 @@ export default function Register() {
                               id="image" 
                               label="Choose image" 
                               required
-                              {...formik.getFieldProps('image')}
+                              onChange={(event) => {
+                                formik.setFieldValue("image", event.currentTarget.files[0]);
+                              }}
                             />
                           </Form.Group>
                           
