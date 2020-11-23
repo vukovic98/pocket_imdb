@@ -2,7 +2,7 @@ import { AUTH_USER, REGISTER, USER_DATA, VERIFICATION } from '../actions/ActionT
 import AuthService from '../../services/AuthService';
 
 const authReducer = (state = AuthService.isAuthenticated(), action) => {
-  console.log(action);
+  
   switch (action.type) {
     case AUTH_USER:
       return action.payload;

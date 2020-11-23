@@ -57,10 +57,8 @@ class CustomUserVerify(APIView):
 
 class CustomUserRegister(APIView):
     permission_classes = [AllowAny]
-    #parser_classes = [JSONParser, MultiPartParser]
 
     def post(self, request):
-        print(request.data)
         reg_serializer = UserSerializer(data=request.data)
         
         if reg_serializer.is_valid(raise_exception=True):

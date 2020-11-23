@@ -1,9 +1,11 @@
 import React, {useEffect} from 'react';
-import {Jumbotron, Card, Image, InputGroup, FormControl, Button} from 'react-bootstrap';
+import {Jumbotron, Card, Image, InputGroup, FormControl} from 'react-bootstrap';
 import NavigationBar from '../component/NavigationBar';
 import {useDispatch, useSelector} from 'react-redux';
 import {loggedUserData} from '../store/actions/UserActions';
 import config from '../config';
+import EditModal from './EditModal';
+import ChangePasswordModal from './ChangePasswordModal';
 
 export default function Profile() {
 
@@ -67,8 +69,8 @@ export default function Profile() {
                         </InputGroup>
                     </Card.Body>
                     <Card.Footer>
-                        <div className="float-left"><Button style={{'backgroundColor':'rgb(86,140,199)', 'borderColor':'rgb(86,140,199)'}}  rounded>Change Password</Button></div>
-                        <div className="float-right"><Button style={{'backgroundColor':'rgb(86,140,199)', 'borderColor':'rgb(86,140,199)'}} rounded>Edit profile</Button></div>
+                        <ChangePasswordModal />
+                        <EditModal />
                     </Card.Footer>
                 </Card>
             </Jumbotron> </div>

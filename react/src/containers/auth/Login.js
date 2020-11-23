@@ -69,7 +69,7 @@ export default function Login() {
                 </Form>
                 <div className="mt-2 text-center">
                     <span style={{'color':'rgb(152,188,227)'}}>Don't have an account?   </span>
-                    <Link to={'register'}><span className="text-blue">Sign Up!</span></Link>
+                    <Link to={''}><span className="text-blue">Sign Up!</span></Link>
                 </div>
         </div>
     );
