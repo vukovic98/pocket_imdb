@@ -18,6 +18,22 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
+
+    def update(self, instance, validated_data):
+        
+        if 'first_name' in validated_data:
+            instance.first_name = validated_data['first_name']
+        if 'last_name' in validated_data:
+            instance.last_name = validated_data['last_name']
+        if 'password' in validated_data:
+            instance.set_password(validated_data['password'])
+        if 'image' in validated_data:
+            instance.image = validated_data['image']
+        
+        instance.save()
+
+        return instance
+
 class CodeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Code
