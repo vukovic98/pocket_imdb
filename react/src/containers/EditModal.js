@@ -4,10 +4,12 @@ import * as Yup from 'yup';
 import {useFormik} from 'formik';
 import {useSelector, useDispatch} from 'react-redux';
 import {editUser} from '../store/actions/UserActions';
+import {userSelector} from '../store/selectors/UserSelector';
 
 export default function EditModal() {
     const [show, setShow] = useState(false);
-    const user = useSelector(state => state.userReducer.userData.data);
+
+    const user = useSelector(userSelector());
     
     const dispatch = useDispatch();
   

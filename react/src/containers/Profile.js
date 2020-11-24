@@ -6,6 +6,7 @@ import {loggedUserData} from '../store/actions/UserActions';
 import config from '../config';
 import EditModal from './EditModal';
 import ChangePasswordModal from './ChangePasswordModal';
+import {userSelector} from '../store/selectors/UserSelector';
 
 export default function Profile() {
 
@@ -14,9 +15,9 @@ export default function Profile() {
     useEffect(() => {
         dispatch(loggedUserData());
     },[]);
-
-    const user = useSelector(state => state.userReducer.userData.data);
-    console.log(user);
+    
+    const user = useSelector(userSelector());
+    
     return (
         <div>
             {!user ? (<div>Loading ... </div>)

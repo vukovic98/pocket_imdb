@@ -44,14 +44,11 @@ class CustomUserVerify(APIView):
 
         user = User.objects.get(username=mail)
 
-        if user:
-            codeObj = Code.objects.get(user=user.id)
-            
-            if codeObj.verificationCode == str(code):
-                codeObj.delete()
-                user.verified = True
-                user.save()
-                return Response(status=status.HTTP_200_OK)
+        if user and user.code.verificationCode == str(code):
+            user.code.delete()
+            user.verified = True
+            user.save()
+            return Response(status=status.HTTP_200_OK)
 
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
