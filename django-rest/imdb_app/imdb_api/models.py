@@ -7,10 +7,11 @@ class Genre(models.Model):
 
 class Movie(models.Model):
 
-    title = models.CharField(max_length=20)
+    title = models.CharField(max_length=50)
     description = models.TextField(max_length=100)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE, null=False)
-    image = models.CharField(max_length=60)
+    image = models.CharField(max_length=160)
+    times_viewed = models.IntegerField(default=0)
 
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
@@ -18,5 +19,5 @@ class Like(models.Model):
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=False)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=False, related_name='comments')
     content = models.TextField(max_length=200)
