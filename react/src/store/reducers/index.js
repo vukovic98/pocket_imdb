@@ -5,6 +5,7 @@ import authReducer from './AuthReducer';
 import errorReducer from './ErrorReducer';
 import movieReducer from './MovieReducer';
 import userReducer from './UserReducer';
+import genreReducer from './GenreReducer';
 
 export default history =>
   combineReducers({
@@ -12,5 +13,6 @@ export default history =>
     userReducer: userReducer,
     error: errorReducer,
     movie: movieReducer,
+    genre: genreReducer,
     router: connectRouter(history)
   });

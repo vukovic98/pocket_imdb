@@ -13,6 +13,13 @@ export const USER_DATA_ERROR = 'USER_DATA_ERROR';
 export const GET_MOVIES = 'GET_MOVIES';
 export const SET_MOVIES = 'SET_MOVIES';
 
+export const GET_GENRES = 'GET_GENRES';
+export const SET_GENRES = 'SET_GENRES';
+export const GET_GENRES_ERROR = 'GET_GENRES_ERROR';
+
+export const LIKE_MOVIE = 'LIKE_MOVIE';
+export const DISLIKE_MOVIE = 'DISLIKE_MOVIE';
+
 export const GET_MOVIE_BY_ID = 'GET_MOVIE_BY_ID';
 export const SET_MOVIE_BY_ID = 'SET_MOVIE_BY_ID';
 export const GET_MOVIE_BY_ID_ERROR = 'GET_MOVIE_BY_ID_ERROR';
@@ -26,3 +33,6 @@ export const EDIT_USER_ERROR = 'EDIT_USER_ERROR';
 
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
 export const CHANGE_PASSWORD_ERROR = 'CHANGE_PASSWORD_ERROR';
+
+export const FILTER_MOVIES = 'FILTER_MOVIES';
+export const FILTER_MOVIES_ERROR = 'FILTER_MOVIES_ERROR';

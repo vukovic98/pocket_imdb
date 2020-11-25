@@ -4,7 +4,8 @@ from .models import User, Code
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'first_name', 'last_name', 'image', 'password', 'username', 'verified')
+        fields = ('id', 'first_name', 'last_name', 'image', 'password', 'username', 'verified', 'likes')
+        depth = 1
 
     def create(self, validated_data):
         user = User(

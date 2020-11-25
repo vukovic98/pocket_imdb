@@ -14,7 +14,7 @@ class Movie(models.Model):
     times_viewed = models.PositiveIntegerField(default=0)
 
 class Like(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, related_name='likes')
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=False)
 
 class Comment(models.Model):

@@ -16,7 +16,7 @@ class LikeSerializer(serializers.HyperlinkedModelSerializer):
 class GenreSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Genre
-        fields = ('name')
+        fields = ('id', 'name')
 
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
