@@ -3,6 +3,7 @@ from rest_framework import permissions, viewsets
 from .models import Movie, Genre, Comment
 from .serializers import MovieSerializer, GenreSerializer, CommentSerializer
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import mixins
 
 class MovieViewSet(viewsets.ModelViewSet):
     """
@@ -14,7 +15,7 @@ class MovieViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['title']
 
-class GenreViewSet(viewsets.ModelViewSet):
+class GenreViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
@@ -22,7 +23,10 @@ class GenreViewSet(viewsets.ModelViewSet):
     serializer_class = GenreSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-class CommentViewSet(viewsets.ModelViewSet):
+class CommentViewSet(mixins.CreateModelMixin, 
+                   mixins.RetrieveModelMixin,
+                   mixins.ListModelMixin,
+                   viewsets.GenericViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """

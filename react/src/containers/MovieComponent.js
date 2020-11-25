@@ -4,7 +4,8 @@ import { Image, Jumbotron} from 'react-bootstrap';
 import {getMovieById} from '../store/actions/MovieActions';
 import {useDispatch, useSelector} from 'react-redux';
 import {movieSelector} from '../store/selectors/MovieSelector';
-import Comment from './Comment';
+import Comment from '../component/Comment';
+import Loader from '../component/Loader';
 
 export default function MovieComponent() {
 
@@ -15,16 +16,15 @@ export default function MovieComponent() {
 
     useEffect(() => {
         dispatch(getMovieById(id));
-    },[]);
+    },[id]);
 
     const movie = useSelector(movieSelector());
 
     return(
         <div>
-            {movie ? 
-            (
-                <div>
-                    <button className='m-1' onClick={() => history.goBack()}><i className="far fa-arrow-left"></i>  Back</button>
+            <Loader isLoading={!movie}>
+                {() => <div>
+                    <button className='m-1' onClick={history.goBack}><i className="far fa-arrow-left"></i>  Back</button>
                     <div className='Movie_Data'>
                         <Jumbotron className="col-md-8 ml-auto row mr-auto mt-3 bg-light pt-5">
                             <div className="row">
@@ -45,16 +45,14 @@ export default function MovieComponent() {
                             <div className='col-md-12 mt-4 pl-0 pr-0'>
                                 <h3>Comments</h3>
                                 {movie.comments.map(comment => {
-                                    return <Comment key={comment.id} data={comment} />
+                                    return <Comment key={comment.id} user={comment.user} content={comment.content} />
                                 })}
                             </div>
                         </Jumbotron>
                     </div>
                 </div>
-            )
-            
-            
-            : (<p>Loading ...</p>)}
+            }   
+            </Loader>
             
         </div>
     );
