@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 
 import { movieService } from '../../services/MovieService';
-import { setMovies } from '../actions/MovieActions';
+import { setMovieById, setMovies } from '../actions/MovieActions';
 
 export function* moviesGet() {
   try {
@@ -9,6 +9,21 @@ export function* moviesGet() {
 
     yield put(setMovies(data));
   } catch (error) {
-    console.log({ error }); /*eslint-disable-line*/
+    alert("Something went wrong!");
+    console.log({ error }); 
+  }
+}
+
+export function* movieById(action) {
+  try {
+    const {data} = yield call(movieService.getMovieById, action.payload);
+
+    console.log(data);
+
+    yield put(setMovieById(data));
+
+  } catch (error) {
+    alert("Something went wrong!");
+    console.log({ error }); 
   }
 }

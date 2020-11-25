@@ -9,7 +9,7 @@ export default function NavigationBar() {
                 <Link to={"home"} className="nav-brand">
                     <Navbar.Brand>Home</Navbar.Brand>
                 </Link>
-                <Nav className="mr-auto">
+                <Nav className="mr-auto text-right">
                     <Link to={"profile"} className="nav-link">Profile</Link>
                 </Nav>
             </Navbar>
