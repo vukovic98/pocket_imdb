@@ -6,7 +6,6 @@ const ENDPOINTS = {
 
 class LikeService extends ApiService {
   likeMovie = (data) => {
-    console.log(data);
     return this.apiClient.post(ENDPOINTS.LIKES, data);
   }
 

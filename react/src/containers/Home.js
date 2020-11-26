@@ -23,34 +23,24 @@ export default function Home() {
   const movies = useSelector(moviesSelector());
   const genres = useSelector(genreSelector());
 
-  const filterMoviesByGenre = (genreId) => {
-    setGenre(genreId);
-
-    const data = {
-      'genreId': genreId,
-      'title': title
-    }
-
-    dispatch(filterMovies(data));
-  };
-
-  const searchMovieByTitle = (titlePar) => {
-    setTitle(titlePar);
-
-    const data = {
+  useEffect(() => {
+    if(genre !== -1 || title !== undefined){
+      const data = {
       'genreId': genre,
-      'title': titlePar
+      'title': title
+      }
+      
+      dispatch(filterMovies(data));
     }
-    dispatch(filterMovies(data));
-  };
+    }, [genre, title])
 
   return(
     <div>
       <NavigationBar />
       <Jumbotron as={Col} className="ml-auto mr-auto mt-3 pt-2 col-md-10 bg-light">
         <div className="row">
-          <Search searchMovieByTitle={searchMovieByTitle}/>
-          <Filter genres={genres} filterMoviesByGenre={filterMoviesByGenre}/>
+          <Search searchMovieByTitle={setTitle}/>
+          <Filter genres={genres} filterMoviesByGenre={setGenre}/>
         </div>
         <hr />
         <div className='text-right'>

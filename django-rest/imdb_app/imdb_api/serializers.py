@@ -8,7 +8,10 @@ class MovieSerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'description', 'genre', 'image', 'times_viewed', 'comments')
         depth = 1
 
-class LikeSerializer(serializers.HyperlinkedModelSerializer):
+class LikeSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
+    )
     class Meta:
         model = Like
         fields = ('id', 'user', 'movie')

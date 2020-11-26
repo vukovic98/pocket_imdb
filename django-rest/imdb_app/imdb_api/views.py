@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import permissions, viewsets
+from rest_framework import permissions, viewsets, serializers
 from .models import Movie, Genre, Comment, Like
 from .serializers import MovieSerializer, GenreSerializer, CommentSerializer, LikeSerializer
 from django_filters.rest_framework import DjangoFilterBackend

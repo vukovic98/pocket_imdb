@@ -13,6 +13,9 @@ export const USER_DATA_ERROR = 'USER_DATA_ERROR';
 export const GET_MOVIES = 'GET_MOVIES';
 export const SET_MOVIES = 'SET_MOVIES';
 
+export const ADD_LIKE = 'ADD_LIKE';
+export const REMOVE_LIKE = 'REMOVE_LIKE';
+
 export const GET_GENRES = 'GET_GENRES';
 export const SET_GENRES = 'SET_GENRES';
 export const GET_GENRES_ERROR = 'GET_GENRES_ERROR';

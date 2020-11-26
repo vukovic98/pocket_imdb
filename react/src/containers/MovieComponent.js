@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useParams, useHistory} from 'react-router-dom';
 import { Image, Jumbotron} from 'react-bootstrap';
 import {getMovieById, likeMovie, dislikeMovie} from '../store/actions/MovieActions';
@@ -8,9 +8,12 @@ import {movieSelector} from '../store/selectors/MovieSelector';
 import {userSelector} from '../store/selectors/UserSelector';
 import Comment from '../component/Comment';
 import Loader from '../component/Loader';
-import config from '../config';
+import LikeComponent from '../component/LikeComponent';
 
 export default function MovieComponent() {
+
+    const movie = useSelector(movieSelector());
+    const user = useSelector(userSelector());
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -23,25 +26,25 @@ export default function MovieComponent() {
     },[id]);
 
     const like = (value) => {
-
+        
         const data = {
-            'user': config.API_BASE_URL + "/user/users/" + user.id + "/",
-            'movie': config.API_BASE_URL + "/imdb/movies/" + movie.id + "/",
+            'movie': movie.id,
         }
         if(value){
             dispatch(likeMovie(data));
         }
         else {
-            //dispatch(dislikeMovie());
+            const likeObj = user.likes.filter(like => like.user === user.id && like.movie === movie.id);
+            
+            dispatch(dislikeMovie(likeObj[0].id));
         }
     }
 
-    const movie = useSelector(movieSelector());
-    const user = useSelector(userSelector());
+    
     console.log(user);
     return(
         <div>
-            <Loader isLoading={!movie}>
+            <Loader isLoading={!movie || !user}>
                 {() => <div>
                     <button className='m-1' onClick={history.goBack}><i className="far fa-arrow-left"></i>  Back</button>
                     <div className='Movie_Data'>
@@ -60,11 +63,7 @@ export default function MovieComponent() {
                                     <p><i className="far fa-film"></i> {movie.genre.name} </p>
                                     <p><i className="far fa-info"></i> {movie.description}</p>
                                 </div>
-                                {user.likes.some(e => e.movie === movie.id) ?
-                                    <span style={{'height':'17px'}} onClick={() => like(false)}><i className='fas fa-heart'></i></span>
-                                    : 
-                                    <span style={{'height':'17px'}} onClick={() => like(true)}><i className='far fa-heart'></i></span>
-                                }
+                                <LikeComponent user={user} movie={movie} like={like}/>
                             </div>
                             <div className='col-md-12 mt-4 pl-0 pr-0'>
                                 <h3>Comments</h3>

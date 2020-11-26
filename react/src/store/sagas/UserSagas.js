@@ -8,12 +8,11 @@ import {userService} from '../../services/UserService';
 export function* loggedUserData() {
     try {
       const user = yield call(userService.loggedUserData);
-  
-      yield put(setUser(user));
+      
+      yield put(setUser(user.data));
     } catch (error) {
       alert("Something went wrong!");
-      // yield put(push('/login'));
-      // yield put(go());
+      console.log({error});
     }
 }
 
