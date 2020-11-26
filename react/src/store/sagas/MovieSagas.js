@@ -3,7 +3,7 @@ import { call, put } from 'redux-saga/effects';
 import { movieService } from '../../services/MovieService';
 import {likeService} from '../../services/LikeService';
 import { setMovieById, setMovies, setGenres } from '../actions/MovieActions';
-import { ADD_LIKE, REMOVE_LIKE } from '../actions/ActionTypes';
+import { ADD_LIKE, REMOVE_LIKE, UPDATE_MOVIES } from '../actions/ActionTypes';
 
 export function* moviesGet() {
   try {
@@ -71,6 +71,18 @@ export function* dislikeMovieSaga(action) {
     yield call(likeService.dislikeMovie, action.payload);
 
     yield put({type: REMOVE_LIKE, payload: action.payload});
+
+  } catch (error) {
+    alert("Something went wrong!");
+    console.log({ error }); 
+  }
+}
+
+export function* createMovieSaga(action) {
+  try {
+    yield call(movieService.createMovie, action.payload);
+
+    yield put({type: UPDATE_MOVIES, payload: action.payload});
 
   } catch (error) {
     alert("Something went wrong!");

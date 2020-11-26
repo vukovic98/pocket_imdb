@@ -5,6 +5,7 @@ import {useFormik} from 'formik';
 import {useSelector, useDispatch} from 'react-redux';
 import {editUser} from '../store/actions/UserActions';
 import {userSelector} from '../store/selectors/UserSelector';
+import Loader from '../component/Loader';
 
 export default function EditModal() {
     const [show, setShow] = useState(false);
@@ -16,7 +17,6 @@ export default function EditModal() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     
-
     const formik = useFormik({
         initialValues: {
             id: user.id,
@@ -54,6 +54,7 @@ export default function EditModal() {
             <Modal.Title>Edit Profile</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <Loader isLoading={!user}>{ () =>
           <Form>
             <Form.Group>
                 <Form.Label>First Name</Form.Label>
@@ -86,6 +87,7 @@ export default function EditModal() {
                     id="image" 
                     label="Choose image" 
                     required
+                    defaultValue=''
                     onChange={(event) => {
                     formik.setFieldValue("image", event.currentTarget.files[0]);
                     }}
@@ -95,7 +97,8 @@ export default function EditModal() {
                                 ) : null}
             </Form.Group>
             
-          </Form>
+          </Form>}
+          </Loader>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>

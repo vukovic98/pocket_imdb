@@ -8,6 +8,12 @@ const ENDPOINTS = {
 };
 
 class MovieService extends ApiService {
+
+  createMovie = (values) => {
+    console.log(values);
+    return this.apiClient.post(ENDPOINTS.MOVIES, values);
+  }
+
   getMovies = () => {
     return this.apiClient.get(ENDPOINTS.MOVIES);
   };

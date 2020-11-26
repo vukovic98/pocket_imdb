@@ -13,6 +13,10 @@ export const USER_DATA_ERROR = 'USER_DATA_ERROR';
 export const GET_MOVIES = 'GET_MOVIES';
 export const SET_MOVIES = 'SET_MOVIES';
 
+export const CREATE_MOVIE = 'CREATE_MOVIE';
+export const CREATE_MOVIE_ERROR = 'CREATE_MOVIE_ERROR';
+export const UPDATE_MOVIES = 'UPDATE_MOVIES';
+
 export const ADD_LIKE = 'ADD_LIKE';
 export const REMOVE_LIKE = 'REMOVE_LIKE';
 

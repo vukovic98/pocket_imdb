@@ -1,8 +1,15 @@
-import { GET_MOVIES, SET_MOVIE_BY_ID, SET_MOVIES, GET_MOVIE_BY_ID, GET_GENRES, SET_GENRES, FILTER_MOVIES, LIKE_MOVIE, DISLIKE_MOVIE } from './ActionTypes';
+import { GET_MOVIES, SET_MOVIE_BY_ID, SET_MOVIES, GET_MOVIE_BY_ID, GET_GENRES, SET_GENRES, FILTER_MOVIES, LIKE_MOVIE, DISLIKE_MOVIE, CREATE_MOVIE } from './ActionTypes';
 
 export const getMovies = () => {
   return {
     type: GET_MOVIES
+  };
+};
+
+export const createMovie = (data) => {
+  return {
+    type: CREATE_MOVIE,
+    payload: data
   };
 };
 

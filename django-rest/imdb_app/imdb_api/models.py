@@ -8,10 +8,11 @@ class Genre(models.Model):
 class Movie(models.Model):
 
     title = models.CharField(max_length=50)
-    description = models.TextField(max_length=100)
+    description = models.TextField(max_length=500)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE, null=False)
     image = models.CharField(max_length=160)
     times_viewed = models.PositiveIntegerField(default=0)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='movies', default=33)
 
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, related_name='likes')

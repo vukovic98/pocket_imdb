@@ -1,8 +1,8 @@
 import { all, takeLatest } from 'redux-saga/effects';
-import { LOGIN, REGISTER, GET_MOVIES, VERIFICATION, LOGGED_USER_DATA, EDIT_USER, CHANGE_PASSWORD, GET_MOVIE_BY_ID, GET_GENRES, FILTER_MOVIES, LIKE_MOVIE, DISLIKE_MOVIE } from '../actions/ActionTypes';
+import { LOGIN, REGISTER, GET_MOVIES, VERIFICATION, LOGGED_USER_DATA, EDIT_USER, CHANGE_PASSWORD, GET_MOVIE_BY_ID, GET_GENRES, FILTER_MOVIES, LIKE_MOVIE, DISLIKE_MOVIE, CREATE_MOVIE } from '../actions/ActionTypes';
 import { userLogin, userRegister, userVerification } from './AuthSagas';
 import {editUser, loggedUserData} from './UserSagas';
-import { genresGet, movieById, moviesGet, filterMovies, likeMovieSaga, dislikeMovieSaga } from './MovieSagas';
+import { genresGet, movieById, moviesGet, filterMovies, likeMovieSaga, dislikeMovieSaga, createMovieSaga } from './MovieSagas';
 import { changePassword } from './UserSagas';
 
 export default function* rootSaga() {
@@ -19,5 +19,6 @@ export default function* rootSaga() {
     takeLatest(FILTER_MOVIES, filterMovies),
     takeLatest(LIKE_MOVIE, likeMovieSaga),
     takeLatest(DISLIKE_MOVIE, dislikeMovieSaga),
+    takeLatest(CREATE_MOVIE, createMovieSaga),
   ]);
 }

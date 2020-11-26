@@ -3,10 +3,12 @@ from .models import Like, Movie, Comment, Genre
 
 
 class MovieSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
+    )
     class Meta:
         model = Movie 
-        fields = ('id', 'title', 'description', 'genre', 'image', 'times_viewed', 'comments')
-        depth = 1
+        fields = ('id', 'title', 'description', 'genre', 'image', 'times_viewed', 'comments', 'user')
 
 class LikeSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(
