@@ -7,6 +7,7 @@ router = routers.DefaultRouter()
 router.register(r'movies', views.MovieViewSet, basename='movie')
 router.register(r'genres', views.GenreViewSet, basename='genre')
 router.register(r'comments', views.CommentViewSet, basename='comment')
+router.register(r'likes', views.LikeViewSet, basename='like')
 
 
 urlpatterns = [

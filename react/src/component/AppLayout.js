@@ -7,7 +7,7 @@ import Register from '../containers/auth/Register';
 import Home from '../containers/Home';
 import Profile from '../containers/Profile';
 import VerificationModal from '../containers/VerificationModal';
-import MovieComponent from './MovieComponent';
+import MovieComponent from '../containers/MovieComponent';
 
 export default function AppLayout() {
   return(

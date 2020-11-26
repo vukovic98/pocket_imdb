@@ -1,12 +1,19 @@
 import React, {useEffect} from 'react';
 import {useParams, useHistory} from 'react-router-dom';
 import { Image, Jumbotron} from 'react-bootstrap';
-import {getMovieById} from '../store/actions/MovieActions';
+import {getMovieById, likeMovie, dislikeMovie} from '../store/actions/MovieActions';
+import {loggedUserData} from '../store/actions/UserActions';
 import {useDispatch, useSelector} from 'react-redux';
 import {movieSelector} from '../store/selectors/MovieSelector';
-import Comment from './Comment';
+import {userSelector} from '../store/selectors/UserSelector';
+import Comment from '../component/Comment';
+import Loader from '../component/Loader';
+import LikeComponent from '../component/LikeComponent';
 
 export default function MovieComponent() {
+
+    const movie = useSelector(movieSelector());
+    const user = useSelector(userSelector());
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -15,16 +22,31 @@ export default function MovieComponent() {
 
     useEffect(() => {
         dispatch(getMovieById(id));
-    },[]);
+        dispatch(loggedUserData());
+    },[id]);
 
-    const movie = useSelector(movieSelector());
+    const like = (value) => {
+        
+        const data = {
+            'movie': movie.id,
+        }
+        if(value){
+            dispatch(likeMovie(data));
+        }
+        else {
+            const likeObj = user.likes.filter(like => like.user === user.id && like.movie === movie.id);
+            
+            dispatch(dislikeMovie(likeObj[0].id));
+        }
+    }
 
+    
+    console.log(user);
     return(
         <div>
-            {movie ? 
-            (
-                <div>
-                    <button className='m-1' onClick={() => history.goBack()}><i className="far fa-arrow-left"></i>  Back</button>
+            <Loader isLoading={!movie || !user}>
+                {() => <div>
+                    <button className='m-1' onClick={history.goBack}><i className="far fa-arrow-left"></i>  Back</button>
                     <div className='Movie_Data'>
                         <Jumbotron className="col-md-8 ml-auto row mr-auto mt-3 bg-light pt-5">
                             <div className="row">
@@ -41,20 +63,19 @@ export default function MovieComponent() {
                                     <p><i className="far fa-film"></i> {movie.genre.name} </p>
                                     <p><i className="far fa-info"></i> {movie.description}</p>
                                 </div>
+                                <LikeComponent user={user} movie={movie} like={like}/>
                             </div>
                             <div className='col-md-12 mt-4 pl-0 pr-0'>
                                 <h3>Comments</h3>
                                 {movie.comments.map(comment => {
-                                    return <Comment key={comment.id} data={comment} />
+                                    return <Comment key={comment.id} user={comment.user} content={comment.content} />
                                 })}
                             </div>
                         </Jumbotron>
                     </div>
                 </div>
-            )
-            
-            
-            : (<p>Loading ...</p>)}
+            }   
+            </Loader>
             
         </div>
     );

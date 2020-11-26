@@ -7,6 +7,7 @@ import config from '../config';
 import EditModal from './EditModal';
 import ChangePasswordModal from './ChangePasswordModal';
 import {userSelector} from '../store/selectors/UserSelector';
+import Loader from '../component/Loader';
 
 export default function Profile() {
 
@@ -20,8 +21,8 @@ export default function Profile() {
     
     return (
         <div>
-            {!user ? (<div>Loading ... </div>)
-            : ( <div><NavigationBar />
+            <Loader isLoading={!user}>
+            {() => <div><NavigationBar />
             <Jumbotron className="ml-auto mr-auto col-md-8 mt-3 bg-light">
                 <Card>
                     <Card.Header className="text-center">
@@ -74,8 +75,8 @@ export default function Profile() {
                         <EditModal />
                     </Card.Footer>
                 </Card>
-            </Jumbotron> </div>
-            )}
+            </Jumbotron> </div>}
+            </Loader>
         </div>
     );
 }
