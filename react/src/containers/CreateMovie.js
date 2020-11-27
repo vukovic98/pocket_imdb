@@ -6,11 +6,14 @@ import {useDispatch, useSelector} from 'react-redux';
 import { createMovie, getGenres } from '../store/actions/MovieActions';
 import { genreSelector } from '../store/selectors/MovieSelector';
 import {validationSchema, initialValues} from '../config/movieValidation';
+import { userSelector } from '../store/selectors/UserSelector';
 
 export default function CreateMovie() {
 
     const history = useHistory();
     const dispatch = useDispatch();
+
+    const user = useSelector(userSelector());
 
     useEffect(() => {
         dispatch(getGenres());
@@ -19,7 +22,7 @@ export default function CreateMovie() {
     const genres = useSelector(genreSelector());
 
     const formik = useFormik({
-        initialValues: initialValues({title: '', description: '', image: '', genre: '', times_viewed: 0, comments: []}),
+        initialValues: initialValues({id: '', title: '', description: '', image: '', genre: '', times_viewed: 0, comments: [], user_id: user.id}),
         validationSchema: validationSchema,
         onSubmit: values => {
             dispatch(createMovie(values));

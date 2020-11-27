@@ -3,7 +3,7 @@ import { call, put } from 'redux-saga/effects';
 import { movieService } from '../../services/MovieService';
 import {likeService} from '../../services/LikeService';
 import { setMovieById, setMovies, setGenres, setCommentsForMovie } from '../actions/MovieActions';
-import { ADD_LIKE, REMOVE_LIKE, UPDATE_MOVIES } from '../actions/ActionTypes';
+import { ADD_LIKE, REMOVE_LIKE, UPDATE_EDITED_MOVIE, UPDATE_MOVIES } from '../actions/ActionTypes';
 
 export function* moviesGet() {
   try {
@@ -95,6 +95,17 @@ export function* getCommentsForMovieSaga(action) {
     const {data} = yield call(movieService.getComments, action.payload);
 
     yield put(setCommentsForMovie(data));
+  } catch(error) {
+    console.log({error});
+  }
+}
+
+export function* editMovieSaga(action){
+  try{
+    console.log(action);
+    const {data} = yield call (movieService.editMovie, action.payload);
+
+    yield put({type: UPDATE_EDITED_MOVIE, payload: data});
   } catch(error) {
     console.log({error});
   }

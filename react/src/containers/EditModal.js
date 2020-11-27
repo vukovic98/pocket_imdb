@@ -38,6 +38,7 @@ export default function EditModal() {
             .required('Required'),
             username: Yup.string().email('Invalid email address').required('Required'),
         }),
+        enableReinitialize: true,
         onSubmit: values => {
             dispatch(editUser(values));
         },
@@ -63,6 +64,7 @@ export default function EditModal() {
                     placeholder="Insert First Name..." 
                     required
                     id="first_name"
+                    value={user.first_name}
                     {...formik.getFieldProps('first_name')}
                 />
                 {formik.touched.first_name && formik.errors.first_name ? (
@@ -75,6 +77,7 @@ export default function EditModal() {
                     type="text" 
                     placeholder="Insert Last Name..." 
                     required
+                    value={user.last_name}
                     id="last_name"
                     {...formik.getFieldProps('last_name')}
                 />

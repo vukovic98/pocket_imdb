@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from rest_framework import permissions, viewsets, serializers
+from rest_framework import permissions, viewsets, serializers, status
 from .models import Movie, Genre, Comment, Like
 from .serializers import MovieSerializer, GenreSerializer, CommentSerializer, LikeSerializer
+from imdb_app.users.serializers import UserSerializer
+from imdb_app.users.models import User
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import mixins
 from rest_framework.response import Response

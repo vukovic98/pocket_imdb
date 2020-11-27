@@ -13,6 +13,10 @@ class MovieService extends ApiService {
     return this.apiClient.post(ENDPOINTS.MOVIES, values);
   }
 
+  editMovie = (values) => {
+    return this.apiClient.put(ENDPOINTS.MOVIES + values.id + '/', values);
+  }
+
   getMovies = () => {
     return this.apiClient.get(ENDPOINTS.MOVIES);
   };

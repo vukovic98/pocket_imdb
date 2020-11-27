@@ -9,6 +9,7 @@ import {userSelector} from '../store/selectors/UserSelector';
 import Comment from '../component/Comment';
 import Loader from '../component/Loader';
 import LikeComponent from '../component/LikeComponent';
+import EditMovieModal from './EditMovieModal';
 
 export default function MovieComponent() {
 
@@ -19,7 +20,7 @@ export default function MovieComponent() {
         dispatch(loggedUserData());
         dispatch(getGenres());
         dispatch(getCommentsForMovie(id));
-    },[id]);
+    },[]);
 
     const movie = useSelector(movieSelector());
     const user = useSelector(userSelector());
@@ -28,6 +29,7 @@ export default function MovieComponent() {
 
     const dispatch = useDispatch();
     const history = useHistory();
+    console.log(movie, user);
     
 
     const like = (value) => {
@@ -50,6 +52,9 @@ export default function MovieComponent() {
             <Loader isLoading={!movie || !user}>
                 {() => <div>
                     <button className='m-1' onClick={history.goBack}><i className="far fa-arrow-left"></i>  Back</button>
+                    { user.movies.some(e => e.id === movie.id) ?
+                    <EditMovieModal /> : ''
+                    }
                     <div className='Movie_Data'>
                         <Jumbotron className="col-md-8 ml-auto row mr-auto mt-3 bg-light pt-5">
                             <div className="row">

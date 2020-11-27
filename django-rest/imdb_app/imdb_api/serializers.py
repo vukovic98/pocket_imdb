@@ -10,6 +10,8 @@ class MovieSerializer(serializers.ModelSerializer):
         model = Movie 
         fields = ('id', 'title', 'description', 'genre', 'image', 'times_viewed', 'comments', 'user')
 
+    
+
 class LikeSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(
         default=serializers.CurrentUserDefault()
