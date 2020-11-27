@@ -3,9 +3,9 @@ import { Col, Jumbotron, Form, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import {useFormik} from 'formik';
 import {useDispatch, useSelector} from 'react-redux';
-import * as Yup from 'yup';
 import { createMovie, getGenres } from '../store/actions/MovieActions';
 import { genreSelector } from '../store/selectors/MovieSelector';
+import {validationSchema, initialValues} from '../config/movieValidation';
 
 export default function CreateMovie() {
 
@@ -19,25 +19,8 @@ export default function CreateMovie() {
     const genres = useSelector(genreSelector());
 
     const formik = useFormik({
-        initialValues: {
-            title: '',
-            description: '',
-            image: '',
-            genre: '',
-            times_viewed: 0,
-            comments: []
-        },
-        validationSchema: Yup.object({
-            title: Yup.string()
-            .required('Required'),
-            description: Yup.string()
-            .required('Required'),
-            image: Yup.string()
-            .required('Required'),
-            genre: Yup.number()
-            .min(1, 'Required')
-            .required('Required'),
-        }),
+        initialValues: initialValues({title: '', description: '', image: '', genre: '', times_viewed: 0, comments: []}),
+        validationSchema: validationSchema,
         onSubmit: values => {
             dispatch(createMovie(values));
         },

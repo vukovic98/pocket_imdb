@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 
 import { movieService } from '../../services/MovieService';
 import {likeService} from '../../services/LikeService';
-import { setMovieById, setMovies, setGenres } from '../actions/MovieActions';
+import { setMovieById, setMovies, setGenres, setCommentsForMovie } from '../actions/MovieActions';
 import { ADD_LIKE, REMOVE_LIKE, UPDATE_MOVIES } from '../actions/ActionTypes';
 
 export function* moviesGet() {
@@ -87,5 +87,15 @@ export function* createMovieSaga(action) {
   } catch (error) {
     alert("Something went wrong!");
     console.log({ error }); 
+  }
+}
+
+export function* getCommentsForMovieSaga(action) {
+  try {
+    const {data} = yield call(movieService.getComments, action.payload);
+
+    yield put(setCommentsForMovie(data));
+  } catch(error) {
+    console.log({error});
   }
 }

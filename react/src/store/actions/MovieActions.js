@@ -1,4 +1,4 @@
-import { GET_MOVIES, SET_MOVIE_BY_ID, SET_MOVIES, GET_MOVIE_BY_ID, GET_GENRES, SET_GENRES, FILTER_MOVIES, LIKE_MOVIE, DISLIKE_MOVIE, CREATE_MOVIE } from './ActionTypes';
+import { GET_MOVIES, SET_MOVIE_BY_ID, SET_MOVIES, GET_MOVIE_BY_ID, GET_GENRES, SET_GENRES, FILTER_MOVIES, LIKE_MOVIE, DISLIKE_MOVIE, CREATE_MOVIE, GET_COMMENTS_FOR_MOVIE, SET_COMMENTS_FOR_MOVIE } from './ActionTypes';
 
 export const getMovies = () => {
   return {
@@ -64,6 +64,20 @@ export const likeMovie = payload => {
 export const dislikeMovie = payload => {
   return {
     type: DISLIKE_MOVIE,
+    payload
+  };
+};
+
+export const getCommentsForMovie = payload => {
+  return {
+    type: GET_COMMENTS_FOR_MOVIE,
+    payload
+  };
+};
+
+export const setCommentsForMovie = payload => {
+  return {
+    type: SET_COMMENTS_FOR_MOVIE,
     payload
   };
 };

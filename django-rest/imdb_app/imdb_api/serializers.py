@@ -23,7 +23,7 @@ class GenreSerializer(serializers.HyperlinkedModelSerializer):
         model = Genre
         fields = ('id', 'name')
 
-class CommentSerializer(serializers.HyperlinkedModelSerializer):
+class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ('id', 'user', 'movie', 'content')

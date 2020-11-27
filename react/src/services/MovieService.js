@@ -2,7 +2,7 @@ import ApiService from './ApiService';
 
 const ENDPOINTS = {
   MOVIES: '/imdb/movies/',
-  COMMENTS: '/imdb/comments?movie=',
+  COMMENTS: '/imdb/comments/?movie=',
   GENRES: '/imdb/genres/',
   FILTER: '/imdb/movies/?',
 };
@@ -10,7 +10,6 @@ const ENDPOINTS = {
 class MovieService extends ApiService {
 
   createMovie = (values) => {
-    console.log(values);
     return this.apiClient.post(ENDPOINTS.MOVIES, values);
   }
 
@@ -24,6 +23,10 @@ class MovieService extends ApiService {
 
   getGenres = () => {
     return this.apiClient.get(ENDPOINTS.GENRES);
+  }
+
+  getComments = (id) => {
+    return this.apiClient.get(ENDPOINTS.COMMENTS + id);
   }
 
   filterMovies = (data) => {

@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {useParams, useHistory} from 'react-router-dom';
 import { Image, Jumbotron} from 'react-bootstrap';
-import {getMovieById, likeMovie, dislikeMovie, getGenres} from '../store/actions/MovieActions';
+import {getMovieById, likeMovie, dislikeMovie, getGenres, getCommentsForMovie} from '../store/actions/MovieActions';
 import {loggedUserData} from '../store/actions/UserActions';
 import {useDispatch, useSelector} from 'react-redux';
-import {genreSelector, movieSelector} from '../store/selectors/MovieSelector';
+import {movieSelector, genreByIdSelector, commentSelector} from '../store/selectors/MovieSelector';
 import {userSelector} from '../store/selectors/UserSelector';
 import Comment from '../component/Comment';
 import Loader from '../component/Loader';
@@ -12,29 +12,23 @@ import LikeComponent from '../component/LikeComponent';
 
 export default function MovieComponent() {
 
-    const movie = useSelector(movieSelector());
-    const user = useSelector(userSelector());
-    const genres = useSelector(genreSelector());
-
-    const dispatch = useDispatch();
-    const history = useHistory();
-    
-    const getGenre = () => {
-        const g = genres.filter(genre => genre.id === movie.genre);
-        
-        if(g)
-            return g[0].name;
-
-        return '';
-    }
-
     let { id } = useParams();
 
     useEffect(() => {
         dispatch(getMovieById(id));
         dispatch(loggedUserData());
         dispatch(getGenres());
+        dispatch(getCommentsForMovie(id));
     },[id]);
+
+    const movie = useSelector(movieSelector());
+    const user = useSelector(userSelector());
+    const genre = useSelector(genreByIdSelector(movie ? movie.genre : 1));
+    const comments = useSelector(commentSelector());
+
+    const dispatch = useDispatch();
+    const history = useHistory();
+    
 
     const like = (value) => {
         
@@ -51,8 +45,6 @@ export default function MovieComponent() {
         }
     }
 
-    
-    console.log(user);
     return(
         <div>
             <Loader isLoading={!movie || !user}>
@@ -71,14 +63,14 @@ export default function MovieComponent() {
                                 <div className='fl-left ml-3 col-md-8'>
                                     <h2>{movie.title}</h2>
                                     <p><i className="far fa-eye"></i> {movie.times_viewed} people saw this movie</p>
-                                    <p><i className="far fa-film"></i> {getGenre()} </p>
+                                    <p><i className="far fa-film"></i> {genre.name} </p>
                                     <p><i className="far fa-info"></i> {movie.description}</p>
                                 </div>
                                 <LikeComponent user={user} movie={movie} like={like}/>
                             </div>
                             <div className='col-md-12 mt-4 pl-0 pr-0'>
                                 <h3>Comments</h3>
-                                {movie.comments.map(comment => {
+                                {comments.map(comment => {
                                     return <Comment key={comment.id} user={comment.user} content={comment.content} />
                                 })}
                             </div>
