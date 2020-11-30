@@ -10,6 +10,7 @@ import Comment from '../component/Comment';
 import Loader from '../component/Loader';
 import LikeComponent from '../component/LikeComponent';
 import EditMovieModal from './EditMovieModal';
+import AddComment from '../component/AddComment';
 
 export default function MovieComponent() {
 
@@ -74,6 +75,8 @@ export default function MovieComponent() {
                             </div>
                             <div className='col-md-12 mt-4 pl-0 pr-0'>
                                 <h3>Comments</h3>
+                                <AddComment user={user} movie={movie}/>
+                                <hr/>
                                 {comments.map(comment => {
                                     return <Comment key={comment.id} user={comment.user} content={comment.content} />
                                 })}
