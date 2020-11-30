@@ -37,10 +37,8 @@ export default function Profile() {
                             <FormControl
                                 disabled
                                 placeholder="Username"
-                                aria-label="Username"
                                 className="bg-light"
-                                aria-describedby="basic-addon1"
-                                value={user.first_name}
+                                defaultValue={user.first_name}
                             />
                         </InputGroup>
                         <InputGroup className="mb-3">
@@ -50,10 +48,8 @@ export default function Profile() {
                             <FormControl
                                 disabled
                                 placeholder="Username"
-                                aria-label="Username"
                                 className="bg-light"
-                                aria-describedby="basic-addon1"
-                                value={user.last_name}
+                                defaultValue={user.last_name}
                             />
                         </InputGroup>
                         <InputGroup className="mb-3">
@@ -64,9 +60,7 @@ export default function Profile() {
                                 disabled
                                 className="bg-light"
                                 placeholder="Username"
-                                aria-label="Username"
-                                aria-describedby="basic-addon1"
-                                value={user.username}
+                                defaultValue={user.username}
                             />
                         </InputGroup>
                     </Card.Body>

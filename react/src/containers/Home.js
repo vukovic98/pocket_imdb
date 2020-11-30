@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 import { Jumbotron, Col, Button } from 'react-bootstrap';
 import NavigationBar from '../component/NavigationBar';
 import {useDispatch, useSelector} from 'react-redux';
@@ -44,11 +45,13 @@ export default function Home() {
         </div>
         <hr />
         <div className='text-right'>
-          <Button 
-            style={{'backgroundColor':'rgb(86,140,199)', 'borderColor':'rgb(86,140,199)'}}
-          >
-            Add Movie
-          </Button>
+          <Link to={'create'}>
+            <Button 
+              style={{'backgroundColor':'rgb(86,140,199)', 'borderColor':'rgb(86,140,199)'}}
+            >
+              Add Movie
+            </Button>
+          </Link>
         </div>
         {movies.length !== 0 ? <MovieList movies={movies}/> : <h2>No Movies In Database</h2>}
       </Jumbotron>

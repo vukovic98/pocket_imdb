@@ -2,8 +2,8 @@ import { call, put } from 'redux-saga/effects';
 
 import { movieService } from '../../services/MovieService';
 import {likeService} from '../../services/LikeService';
-import { setMovieById, setMovies, setGenres } from '../actions/MovieActions';
-import { ADD_LIKE, REMOVE_LIKE } from '../actions/ActionTypes';
+import { setMovieById, setMovies, setGenres, setCommentsForMovie } from '../actions/MovieActions';
+import { ADD_LIKE, REMOVE_LIKE, UPDATE_EDITED_MOVIE, UPDATE_MOVIES } from '../actions/ActionTypes';
 
 export function* moviesGet() {
   try {
@@ -75,5 +75,38 @@ export function* dislikeMovieSaga(action) {
   } catch (error) {
     alert("Something went wrong!");
     console.log({ error }); 
+  }
+}
+
+export function* createMovieSaga(action) {
+  try {
+    yield call(movieService.createMovie, action.payload);
+
+    yield put({type: UPDATE_MOVIES, payload: action.payload});
+
+  } catch (error) {
+    alert("Something went wrong!");
+    console.log({ error }); 
+  }
+}
+
+export function* getCommentsForMovieSaga(action) {
+  try {
+    const {data} = yield call(movieService.getComments, action.payload);
+
+    yield put(setCommentsForMovie(data));
+  } catch(error) {
+    console.log({error});
+  }
+}
+
+export function* editMovieSaga(action){
+  try{
+    console.log(action);
+    const {data} = yield call (movieService.editMovie, action.payload);
+
+    yield put({type: UPDATE_EDITED_MOVIE, payload: data});
+  } catch(error) {
+    console.log({error});
   }
 }

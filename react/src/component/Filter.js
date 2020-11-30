@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 
 export default function Filter({genres, filterMoviesByGenre}) {
-    const [selectedGenre, setGenre] = useState(-1);
+    const [selectedGenre, setGenre] = useState('-1');
 
     useEffect(() => {
       filterMoviesByGenre(selectedGenre);

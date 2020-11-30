@@ -8,6 +8,7 @@ import Home from '../containers/Home';
 import Profile from '../containers/Profile';
 import VerificationModal from '../containers/VerificationModal';
 import MovieComponent from '../containers/MovieComponent';
+import CreateMovie from '../containers/CreateMovie';
 
 export default function AppLayout() {
   return(
@@ -20,6 +21,7 @@ export default function AppLayout() {
           <Route path='/home' exact> <Home /> </Route>
           <Route path='/profile' exact> <Profile /> </Route>
           <Route path='/movie/:id' exact> <MovieComponent /> </Route>
+          <Route path='/create' exact> <CreateMovie /> </Route>
         </Switch>
       </Router>
     </div>

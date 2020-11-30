@@ -5,6 +5,7 @@ import {useFormik} from 'formik';
 import {useSelector, useDispatch} from 'react-redux';
 import {editUser} from '../store/actions/UserActions';
 import {userSelector} from '../store/selectors/UserSelector';
+import Loader from '../component/Loader';
 
 export default function EditModal() {
     const [show, setShow] = useState(false);
@@ -16,7 +17,6 @@ export default function EditModal() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     
-
     const formik = useFormik({
         initialValues: {
             id: user.id,
@@ -38,6 +38,7 @@ export default function EditModal() {
             .required('Required'),
             username: Yup.string().email('Invalid email address').required('Required'),
         }),
+        enableReinitialize: true,
         onSubmit: values => {
             dispatch(editUser(values));
         },
@@ -54,6 +55,7 @@ export default function EditModal() {
             <Modal.Title>Edit Profile</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <Loader isLoading={!user}>{ () =>
           <Form>
             <Form.Group>
                 <Form.Label>First Name</Form.Label>
@@ -62,6 +64,7 @@ export default function EditModal() {
                     placeholder="Insert First Name..." 
                     required
                     id="first_name"
+                    value={user.first_name}
                     {...formik.getFieldProps('first_name')}
                 />
                 {formik.touched.first_name && formik.errors.first_name ? (
@@ -74,6 +77,7 @@ export default function EditModal() {
                     type="text" 
                     placeholder="Insert Last Name..." 
                     required
+                    value={user.last_name}
                     id="last_name"
                     {...formik.getFieldProps('last_name')}
                 />
@@ -86,6 +90,7 @@ export default function EditModal() {
                     id="image" 
                     label="Choose image" 
                     required
+                    defaultValue=''
                     onChange={(event) => {
                     formik.setFieldValue("image", event.currentTarget.files[0]);
                     }}
@@ -95,7 +100,8 @@ export default function EditModal() {
                                 ) : null}
             </Form.Group>
             
-          </Form>
+          </Form>}
+          </Loader>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
