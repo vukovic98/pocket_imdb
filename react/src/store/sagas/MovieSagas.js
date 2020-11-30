@@ -1,9 +1,10 @@
 import { call, put } from 'redux-saga/effects';
 
 import { movieService } from '../../services/MovieService';
+import { movieOMDbService } from '../../services/OMDbService/MovieService';
 import {likeService} from '../../services/LikeService';
 import { setMovieById, setMovies, setGenres, setCommentsForMovie } from '../actions/MovieActions';
-import { ADD_LIKE, REMOVE_LIKE, UPDATE_COMMENTS, UPDATE_EDITED_MOVIE, UPDATE_MOVIES } from '../actions/ActionTypes';
+import { ADD_LIKE, REMOVE_LIKE, SET_OMDb_MOVIE, UPDATE_COMMENTS, UPDATE_EDITED_MOVIE, UPDATE_MOVIES } from '../actions/ActionTypes';
 
 export function* moviesGet() {
   try {
@@ -96,7 +97,7 @@ export function* getCommentsForMovieSaga(action) {
 
     yield put(setCommentsForMovie(data));
   } catch(error) {
-    console.log({error});
+    console.log(error.response);
   }
 }
 
@@ -112,10 +113,20 @@ export function* editMovieSaga(action){
 
 export function* addCommentSaga(action){
   try{
-    console.log(action);
     const {data} = yield call (movieService.addComment, action.payload);
 
     yield put({type: UPDATE_COMMENTS, payload: data});
+  } catch(error) {
+    console.log({error});
+  }
+}
+
+export function* getMovieOMDb(action){
+  try{
+
+    const data = yield call (movieOMDbService.getMovie, action.payload);
+    
+    yield put({type: SET_OMDb_MOVIE, payload: data});
   } catch(error) {
     console.log({error});
   }

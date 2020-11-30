@@ -7,6 +7,7 @@ import movieReducer from './MovieReducer';
 import userReducer from './UserReducer';
 import genreReducer from './GenreReducer';
 import commentReducer from './CommentReducer';
+import OMDbMovieReducer from './OMDbReducer';
 
 export default history =>
   combineReducers({
@@ -16,5 +17,6 @@ export default history =>
     movie: movieReducer,
     genre: genreReducer,
     comment: commentReducer,
+    omdbMovie: OMDbMovieReducer,
     router: connectRouter(history)
   });

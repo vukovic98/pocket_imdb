@@ -1,12 +1,12 @@
 import React from 'react';
 import { Form, Col, Button} from 'react-bootstrap';
-import {useFormik} from 'formik';
+import { useFormik} from 'formik';
 import {useSelector} from 'react-redux';
 import {validationSchema, initialValues} from '../validation/movieValidation';
 import { genreSelector } from '../store/selectors/MovieSelector';
 
 
-export default function MovieDataForm({movie, action, title}) {
+export default function MovieDataForm({movie, action, title, onTitleEnter}) {
 
     const genres = useSelector(genreSelector());
     
@@ -17,8 +17,9 @@ export default function MovieDataForm({movie, action, title}) {
         validationSchema: validationSchema,
         onSubmit: values => {
             action(values);
-        },
+        }
     });
+
   
     return (
       <>
@@ -30,7 +31,9 @@ export default function MovieDataForm({movie, action, title}) {
                     type="text" 
                     required
                     id="title"
-                    {...formik.getFieldProps('title')}
+                    onBlur={(e) => onTitleEnter(e.target.value)}
+                    value={formik.values.title}
+                    onChange={formik.handleChange}
                     />
                 {formik.touched.title && formik.errors.title ? (
                         <div style={{'color':'red'}}>*{formik.errors.title}</div>
