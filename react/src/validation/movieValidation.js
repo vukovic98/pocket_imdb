@@ -19,7 +19,7 @@ export const validationSchema = Yup.object({
     .required('Required'),
     image: Yup.string()
     .required('Required'),
-    genre: Yup.number()
+    genre: Yup.number() 
     .min(1, 'Required')
     .required('Required'),
 })

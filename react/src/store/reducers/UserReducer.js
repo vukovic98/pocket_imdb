@@ -1,7 +1,7 @@
 import { SET_USER, EDIT_USER, CHANGE_PASSWORD, ADD_LIKE, REMOVE_LIKE } from '../actions/ActionTypes';
 
 const initialState = {
-  userData: {}
+  userData: null
 };
 
 const userReducer = (state = initialState, action) => {

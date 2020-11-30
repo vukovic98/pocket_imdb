@@ -24,12 +24,11 @@ export default function MovieComponent() {
 
     const movie = useSelector(movieSelector());
     const user = useSelector(userSelector());
-    const genre = useSelector(genreByIdSelector(movie ? movie.genre : 1));
+    const genre = useSelector(genreByIdSelector(movie ? movie.genre : null));
     const comments = useSelector(commentSelector());
 
     const dispatch = useDispatch();
     const history = useHistory();
-    console.log(movie, user);
     
 
     const like = (value) => {
