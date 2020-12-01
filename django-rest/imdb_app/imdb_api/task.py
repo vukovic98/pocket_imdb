@@ -6,12 +6,12 @@ from datetime import timedelta
 from django.conf import settings
 
 @shared_task(retry_kwargs={'max_retries': 3, 'countdown': 5})
-def send_update_mail(title):
+def send_update_mail(title, email_from=settings.FROM_EMAIL):
     try:
         send_mail(
             'Information Mail',
             'A new movie ' + title + ' was created!',
-            'from@example.com',
+            email_from,
             [settings.ADMIN_EMAIL_ADDRESS],
             fail_silently=False
         )
@@ -23,11 +23,11 @@ def send_update_mail(title):
             retry_email_1h(title)
 
 @periodic_task(run_every=timedelta(hours=1), options={"task_id":"12345"})
-def retry_email_1h(title):
+def retry_email_1h(title, email_from=settings.FROM_EMAIL):
     send_mail(
         'Information Mail',
         'A new movie ' + title + ' was created!',
-        'from@example.com',
+        email_from,
         [settings.ADMIN_EMAIL_ADDRESS],
         fail_silently=False
     )

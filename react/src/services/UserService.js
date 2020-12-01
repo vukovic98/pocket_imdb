@@ -13,18 +13,6 @@ class UserService extends ApiService {
   }
 
   init = () => {
-
-    this.apiClient.interceptors.request.use(function (config) {
-      const user = localStorage.getItem('user');
-      const token = user ? 'Bearer ' + JSON.parse(user).access : undefined;
-
-      if(token){
-        config.headers.Authorization =  token;
-      }
-    
-        return config;
-    });
-    
   };
 
   loggedUserData = () => {

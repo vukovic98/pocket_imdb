@@ -27,7 +27,6 @@ export default function CreateMovie() {
 
     const onTitleEnter = (title) => {
         dispatch(getOMDbMovie(title));
-        console.log(omdbMovie);
     }
 
     return(
