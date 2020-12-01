@@ -84,7 +84,7 @@ export function* createMovieSaga(action) {
     yield call(movieService.createMovie, action.payload);
 
     yield put({type: UPDATE_MOVIES, payload: action.payload});
-
+    alert('Movie was created successfylly!');
   } catch (error) {
     alert("Something went wrong!");
     console.log({ error }); 

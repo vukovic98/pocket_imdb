@@ -15,7 +15,7 @@ export default function CreateMovie() {
     
     const omdbMovie = useSelector(omdbMovieSelector());
 
-    const emptyMovie = {id: '', title: '', description: omdbMovie?JSON.stringify(omdbMovie):'', image: '', genre: '', times_viewed: 0, comments: []};
+    const emptyMovie = {id: '', title: '', description: omdbMovie?JSON.stringify(omdbMovie).slice(0, 500):'', image: '', genre: '', times_viewed: 0, comments: []};
 
     useEffect(() => {
         dispatch(getGenres());

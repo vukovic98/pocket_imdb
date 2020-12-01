@@ -7,6 +7,8 @@ from imdb_app.users.models import User
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import mixins
 from rest_framework.response import Response
+from django.conf import settings
+from .task import send_update_mail
 
 class MovieViewSet(viewsets.ModelViewSet):
     """
@@ -17,6 +19,16 @@ class MovieViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['title', 'genre']
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        headers = self.get_success_headers(serializer.data)
+ 
+        send_update_mail(serializer.data['title'])
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
