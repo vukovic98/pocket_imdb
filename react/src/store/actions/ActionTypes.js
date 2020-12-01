@@ -37,6 +37,9 @@ export const UPDATE_EDITED_MOVIE = 'UPDATE_EDITED_MOVIE';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const UPDATE_COMMENTS = 'UPDATE_COMMENTS';
 
+export const OMDb_GET = 'OMDb_GET';
+export const SET_OMDb_MOVIE = 'SET_OMDb_MOVIE';
+
 export const LOGGED_USER_DATA = 'LOGGED_USER_DATA';
 export const LOGGED_USER_DATA_ERROR = 'LOGGED_USER_DATA_ERROR';
 

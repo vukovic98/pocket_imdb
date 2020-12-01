@@ -6,6 +6,17 @@ class HttpService {
     this.client = axios.create(options);
     this.client.interceptors.response.use(this.handleSuccessResponse, this.handleErrorResponse);
     this.unauthorizedCallback = () => {};
+    
+    this.client.interceptors.request.use(function (config) {
+      const user = localStorage.getItem('user');
+      const token = user ? 'Bearer ' + JSON.parse(user).access : undefined;
+
+      if(token){
+        config.headers.Authorization =  token;
+      }
+    
+        return config;
+    });
   }
 
   attachHeaders(headers) {

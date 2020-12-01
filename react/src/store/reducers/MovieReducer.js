@@ -14,9 +14,7 @@ const movieReducer = (state = initialState, action) => {
       return { ...state, all: [...state.all, action.payload]};
     case UPDATE_EDITED_MOVIE:
       const newMovies = state.all.filter(movie => movie.id !== action.payload.id);
-
       newMovies.push(action.payload);
-      
       return { ...state, all: newMovies, movie: action.payload};
     default:
       return state;

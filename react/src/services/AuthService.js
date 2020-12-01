@@ -37,7 +37,6 @@ class AuthService extends ApiService {
 
   createSession = user => {
     localStorage.setItem('user', JSON.stringify(user));
-    this.setAuthorizationHeader();
   };
 
   destroySession = () => {

@@ -10,6 +10,8 @@ drf-yasg==1.17.0
 django-filter==2.1.0
 django-cors-headers==3.5.0
 djangorestframework-simplejwt
+celery==3.1.18
+redis==2.10.3
 # Developer Tools
 ipdb==0.11
 ipython==7.2.0

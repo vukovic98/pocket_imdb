@@ -13,17 +13,6 @@ class UserService extends ApiService {
   }
 
   init = () => {
-    
-    const user = localStorage.getItem('user');
-  
-    if (user) { 
-        console.log(user);
-        const userJson = JSON.parse(user);
-        const token = userJson.access;
-        this.api.attachHeaders({
-          Authorization: `Bearer ${token}`
-        });
-    }
   };
 
   loggedUserData = () => {

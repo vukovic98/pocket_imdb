@@ -3,6 +3,7 @@ import { createSelector } from 'reselect';
 const movieStateSelector = state => state.movie;
 const genreStateSelector = state => state.genre;
 const commentStateSelector = state => state.comment;
+const omdbStateSelector = state => state.omdbMovie;
 
 export const moviesSelector = () => createSelector(movieStateSelector, movies => movies.all);
 export const movieSelector = () => createSelector(movieStateSelector, movie => movie.movie);
@@ -12,3 +13,4 @@ export const genreByIdSelector = (id) => createSelector(
     (genres) => {return genres.find((genre) => genre.id === id)}
  );
  export const commentSelector = () => createSelector(commentStateSelector, comments => comments.all);
+ export const omdbMovieSelector = () => createSelector(omdbStateSelector, movie => movie.OMDbMovie);
